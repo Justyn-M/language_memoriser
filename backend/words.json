@@ -1,0 +1,36 @@
+{
+    "French": [
+        {"english": "Hello", "foreign": "Bonjour", "pronunciation": "bohn-zhoor"},
+        {"english": "World", "foreign": "Monde", "pronunciation": "mohnd"},
+        {"english": "Flutter", "foreign": "Papillon", "pronunciation": "pah-pee-yawn"},
+        {"english": "Python", "foreign": "Python", "pronunciation": "pee-thon"},
+        {"english": "Backend", "foreign": "Backend", "pronunciation": "bahk-end"},
+        {"english": "Frontend", "foreign": "Frontend", "pronunciation": "fron-end"},
+        {"english": "API", "foreign": "API", "pronunciation": "ay-pee-eye"},
+        {"english": "Server", "foreign": "Serveur", "pronunciation": "sehr-vuhr"},
+        {"english": "Database", "foreign": "Base de données", "pronunciation": "bahz duh doh-neh"},
+        {"english": "Mobile", "foreign": "Mobile", "pronunciation": "mo-beel"},
+        {"english": "Application", "foreign": "Application", "pronunciation": "ah-plee-kah-syon"},
+        {"english": "Cloud", "foreign": "Nuage", "pronunciation": "nwahzh"},
+        {"english": "Computer", "foreign": "Ordinateur", "pronunciation": "or-dee-nah-teur"},
+        {"english": "Network", "foreign": "Réseau", "pronunciation": "ray-zoh"},
+        {"english": "Technology", "foreign": "Technologie", "pronunciation": "tek-no-loh-zhee"},
+        {"english": "Programming", "foreign": "Programmation", "pronunciation": "pro-grah-mah-syon"}
+    ],
+    "Japanese": [
+        {"english": "Hello", "foreign": "こんにちは", "pronunciation": "konnichiwa"},
+        {"english": "Thank you", "foreign": "ありがとう", "pronunciation": "arigatou"},
+        {"english": "Goodbye", "foreign": "さようなら", "pronunciation": "sayounara"},
+        {"english": "Yes", "foreign": "はい", "pronunciation": "hai"},
+        {"english": "No", "foreign": "いいえ", "pronunciation": "iie"},
+        {"english": "Please", "foreign": "お願いします", "pronunciation": "onegaishimasu"},
+        {"english": "Sorry", "foreign": "ごめんなさい", "pronunciation": "gomennasai"},
+        {"english": "I don't understand", "foreign": "わかりません", "pronunciation": "wakarimasen"},
+        {"english": "How much?", "foreign": "いくらですか?", "pronunciation": "ikura desu ka?"},
+        {"english": "Delicious", "foreign": "おいしい", "pronunciation": "oishii"},
+        {"english": "I love you", "foreign": "愛しています", "pronunciation": "aishiteimasu"},
+        {"english": "Help", "foreign": "助けて", "pronunciation": "tasukete"},
+        {"english": "Fire", "foreign": "火事", "pronunciation": "kaji"},
+        {"english": "Stop", "foreign": "止まれ", "pronunciation": "tomare"}
+    ]
+}
