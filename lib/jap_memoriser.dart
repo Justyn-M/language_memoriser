@@ -25,7 +25,7 @@ class JapaneseTranslationPageState extends State<JapaneseTranslationPage> {
   }
 
   void initializeTts() async {
-    await flutterTts.setLanguage('ja-JP');
+    await flutterTts.setLanguage('ja-JP'); // Japanese TTS
     await flutterTts.setPitch(1.0);
     await flutterTts.setSpeechRate(0.5);
     flutterTts.setCompletionHandler(() {
@@ -39,7 +39,7 @@ class JapaneseTranslationPageState extends State<JapaneseTranslationPage> {
   Future<void> fetchWords() async {
     List<Map<String, String>> newWordPairs = [];
     while (newWordPairs.length < 5) {
-      final response = await http.get(Uri.parse('http://IPv4:5000/words?language=Japanese'));
+      final response = await http.get(Uri.parse('http://IPv4:5000/words?language=Japanese')); // Replace Ipv4 with local device IP
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final newPair = {
@@ -72,7 +72,7 @@ class JapaneseTranslationPageState extends State<JapaneseTranslationPage> {
     Map<String, String> newPair;
     bool isDuplicate;
     do {
-      final response = await http.get(Uri.parse('http://Ipv4:5000/words?language=Japanese'));
+      final response = await http.get(Uri.parse('http://Ipv4:5000/words?language=Japanese')); // Replace Ipv4 with local device IP
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         newPair = {

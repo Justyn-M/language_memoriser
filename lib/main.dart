@@ -19,18 +19,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Home Screen
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Appbar
       appBar: AppBar(
         title: const Text('Word Memoriser', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color.fromARGB(255, 34, 34, 34),
       ),
       body: Container(
         decoration: const BoxDecoration(
+          // Gradient for home screen background
           gradient: LinearGradient(
             colors: [Colors.blue, Colors.purple],
             begin: Alignment.topRight,
@@ -50,10 +53,15 @@ class WelcomePage extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
+              // Japanese button
               const SizedBox(height: 50),
               languageButton(context, 'Japanese', Icons.translate),
+
+              // French Button
               const SizedBox(height: 20),
               languageButton(context, 'French', Icons.language),
+
+              // Button for manage words screen
               const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
@@ -71,6 +79,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
+// Language button widget for languages
   Widget languageButton(BuildContext context, String language, IconData icon) {
     return Card(
       elevation: 5,
@@ -105,6 +114,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
+// Widget called to tell a pressed button which language page to go to
   Widget _getPage(String language) {
     switch (language) {
       case 'Japanese':

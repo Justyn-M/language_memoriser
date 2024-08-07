@@ -49,8 +49,16 @@ To add a new language:
     (3) Create a new button for the new language in main.dart
     (4) Add a new section for the new language in the json database such as 'Russian'
     (5) Populate database following template of {"english": "", "foreign": "", "pronunciation": ""}
+    (6) Update manage_words.dart, at items: <String>['French', 'Japanese'] -> add the new language
 
 You have now added a new language
+
+## Basic full stack tutorial ##
+This section provides a basic tutorial if you want to try create this app from scratch.
+
+    (1) Create a new flutter project
+    (2) Create backend folder at project root directory
+    (3) 
 
 ## Hosting the app in AWS cloud ##
 This section will be updated soon....

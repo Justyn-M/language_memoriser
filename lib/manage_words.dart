@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+// Manage words screen
+
 class ManageWordsPage extends StatefulWidget {
   const ManageWordsPage({super.key});
 
   @override
-  _ManageWordsPageState createState() => _ManageWordsPageState();
+  ManageWordsPageState createState() => ManageWordsPageState();
 }
 
-class _ManageWordsPageState extends State<ManageWordsPage> {
+class ManageWordsPageState extends State<ManageWordsPage> {
   List<Map<String, String>> words = [];
+  // Automatically set French to be the first language that appears
   String selectedLanguage = 'French';
 
   @override
@@ -19,9 +22,10 @@ class _ManageWordsPageState extends State<ManageWordsPage> {
     fetchWords();
   }
 
+  // Shows all words in that specific language database
   Future<void> fetchWords() async {
     final response = await http.get(Uri.parse(
-        'http://Ipv4:5000/all_words?language=$selectedLanguage'));
+        'http://Ipv4:5000/all_words?language=$selectedLanguage')); // Replace Ipv4 with local device IP
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body) as List<dynamic>;
       setState(() {
@@ -32,6 +36,7 @@ class _ManageWordsPageState extends State<ManageWordsPage> {
     }
   }
 
+  // Function to remove a word through the UI
   Future<void> removeWord(String english) async {
     final response = await http.post(
       Uri.parse('http://IPv4:5000/remove_word'),
@@ -45,6 +50,7 @@ class _ManageWordsPageState extends State<ManageWordsPage> {
     }
   }
 
+  // Function to allow users to add words
   void showAddWordDialog() {
     String english = '';
     String foreign = '';
@@ -79,7 +85,7 @@ class _ManageWordsPageState extends State<ManageWordsPage> {
           TextButton(
             onPressed: () async {
               final response = await http.post(
-                Uri.parse('http://IPv4:5000/add_word'),
+                Uri.parse('http://IPv4:5000/add_word'), // Replace Ipv4 with local device IP
                 headers: {'Content-Type': 'application/json'},
                 body: jsonEncode({
                   'language': selectedLanguage,
@@ -89,8 +95,10 @@ class _ManageWordsPageState extends State<ManageWordsPage> {
                 }),
               );
               if (response.statusCode == 200) {
-                fetchWords();
-                Navigator.of(ctx).pop();
+                if (mounted) {
+                  fetchWords();
+                  Navigator.of(ctx).pop();
+                }
               } else {
                 throw Exception('Failed to add word');
               }
@@ -126,7 +134,7 @@ class _ManageWordsPageState extends State<ManageWordsPage> {
                   fetchWords();
                 });
               },
-              items: <String>['French', 'Japanese']
+              items: <String>['French', 'Japanese'] //add new languages here
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,

@@ -12,35 +12,37 @@ class FrenchTranslationPage extends StatefulWidget {
 }
 
 class FrenchTranslationPageState extends State<FrenchTranslationPage> {
+  // Declaring global variables
   List<Map<String, String>> wordPairs = [];
   List<Map<String, String>> shuffledFrenchPairs = [];
   int? selectedEnglishIndex;
   int? selectedFrenchIndex;
-  FlutterTts flutterTts = FlutterTts();
+  FlutterTts flutterTts = FlutterTts(); // Flutter text to speech
 
   @override
   void initState() {
     super.initState();
-    initializeTts();
+    initializeTts(); // Initialise text to speech 
     fetchWords();
   }
 
   void initializeTts() async {
-    await flutterTts.setLanguage('fr-FR');
+    await flutterTts.setLanguage('fr-FR'); // French setting for TTS
     await flutterTts.setPitch(1.0);
     await flutterTts.setSpeechRate(0.5);
     flutterTts.setCompletionHandler(() {
-      print("TTS playback finished.");
+      print("TTS playback finished."); // Debug code -> remove if using AWS to host
     });
     flutterTts.setErrorHandler((msg) {
       print("TTS error: $msg");
     });
   }
 
+// Get words from backend
   Future<void> fetchWords() async {
     List<Map<String, String>> newWordPairs = [];
     while (newWordPairs.length < 5) {
-      final response = await http.get(Uri.parse('http://IPv4:5000/words?language=French'));
+      final response = await http.get(Uri.parse('http://IPv4:5000/words?language=French')); // Replace Ipv4 with local device IP
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         final newPair = {
@@ -63,17 +65,20 @@ class FrenchTranslationPageState extends State<FrenchTranslationPage> {
     });
   }
 
+// Gets the right pairs from the database
   bool containsPair(Map<String, String> pair, List<Map<String, String>> list) {
     return list.any((item) =>
         item['english'] == pair['english'] &&
         item['foreign'] == pair['foreign']);
   }
 
+
+// Gets a new word pair after 1 pair has been pressed on UO
   Future<void> fetchSingleWordPair(int index) async {
     Map<String, String> newPair;
     bool isDuplicate;
     do {
-      final response = await http.get(Uri.parse('http://Ipv4:5000/words?language=French'));
+      final response = await http.get(Uri.parse('http://Ipv4:5000/words?language=French')); // Replace Ipv4 with local device IP
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         newPair = {
@@ -90,15 +95,17 @@ class FrenchTranslationPageState extends State<FrenchTranslationPage> {
 
     setState(() {
       wordPairs[index] = newPair;
-      shuffleFrenchWords();
+      shuffleFrenchWords(); // Shuffle right side foreign language translations
     });
   }
 
+// Shuffles foreign language translations
   void shuffleFrenchWords() {
     shuffledFrenchPairs = List.from(wordPairs);
     shuffledFrenchPairs.shuffle();
   }
 
+// Function for tap logic
   void handleTap(bool isLeft, int index) {
     setState(() {
       if (isLeft) {
@@ -129,6 +136,7 @@ class FrenchTranslationPageState extends State<FrenchTranslationPage> {
     });
   }
 
+// Word box widget
   Widget buildWordContainer(String word, {bool selected = false}) {
     final lines = word.split('\n');
     final pronunciation = lines.length > 1 ? lines[0] : '';
