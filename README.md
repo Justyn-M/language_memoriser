@@ -66,7 +66,7 @@ This section provides a basic tutorial if you want to try create this app from s
 
     (3) At app/src/build.gradle change min&targetSdk versions to: 
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
 
     (4) At settings.gradle, update id "org.jetbrains.kotlin.android" version "<Latest kotlin version>" apply false 
 
@@ -157,25 +157,27 @@ This section outlines the steps needed for hosting the backend on Amazon Web Ser
 
 4) Launch Instance
 
-5) Find the .ppk file that is downloaded
+5) Create an elastic IP & Associate it with your new instance
 
-6) Launch PuTTY & configure:
+6) Find the .ppk file that is downloaded
+
+7) Launch PuTTY & configure:
     Session -> host name -> enter ec2-user@<EC2PublicIPAddress>
     Connection -> SSH -> Auth -> Private key file for authentication -> browse & select .ppk file
     Connection -> put 15 secs between keepalives -> enable TCP keepalives
     Click open at bottom of window
     Press yes to confirm host key
 
-7) In PuTTY do:
+8) In PuTTY do:
     sudo yum update -y
     sudo yum install python3 -y
     sudo yum install python3-pip -y
     pip3 install Flask Flask-CORS
     sudo yum install git -y
 
-8) Go back to the flutter code and at every point in the code that calls an IP address, replace it with the public ip address of your EC2 instance
+9) Go back to the flutter code and at every point in the code that calls an IP address, replace it with the public ip address of your EC2 instance
 
-9) Use WinSCP to upload project files:
+10) Use WinSCP to upload project files:
     set up new session
     select SFTP in file protocol dropdown menu
     In hostname enter EC2 public IP
@@ -184,22 +186,22 @@ This section outlines the steps needed for hosting the backend on Amazon Web Ser
     Save & Login
     Upload entire flutter project from device to AWS cloud server by dragging and dropping
 
-10) In PuTTY, navigate to the backend folder
+11) In PuTTY, navigate to the backend folder
 
-11) Start flask server using command:
+12) Start flask server using command:
     flask run --host=0.0.0.0 --port=5000
 
-12) Check server status by entering http://your-ec2-public-ip:5000 into a browser
+13) Check server status by entering http://your-ec2-public-ip:5000 into a browser
 
-13) Test application connection using an emulator on flutter 
+14) Test application connection using an emulator on flutter 
 
-14) If app is fully functional run command:
+15) If app is fully functional run command:
     flutter build apk --release
 
     Resolve any issues if needed
 
-15) Navigate to the apk file in /build folder.
+16) Navigate to the apk file in /build folder.
 
-16) Send it to your phone
+17) Send it to your phone
 
-17) The app is fully completed and functional!
+18) The app is fully completed and functional!
