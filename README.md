@@ -1,7 +1,7 @@
 # Memoriser
 
-Memoriser is a word memoriser that works on android emulators. This document will outline its use and also provide a brief tutorial on
-how to create this app from scratch. This document will be further updated when a tutorial of hosting the app on AWS is ready.
+Memoriser is a word memoriser that works on android emulators and physical phone devices. This document will outline its use and also provide a brief tutorial on
+how to create this app from scratch. This document also includes a tutorial of hosting the app on AWS.
 
 Created to show my knowledge on basic full stack development.
 
@@ -10,6 +10,7 @@ Tech stack used:
 Flutter - Frontend
 Json - Database
 Python (Flask) - Backend
+Amazon Web Servies
 
 The current available languages are japanese and french.
 
@@ -139,4 +140,64 @@ This section provides a basic tutorial if you want to try create this app from s
             (20) Create functionality in manage words screen to add words to database using UI
 
 ## Hosting the app in AWS cloud ##
-This section will be updated soon....
+This section outlines the steps needed for hosting the backend on Amazon Web Services
+
+1) Go to EC2 in AWS
+
+2) Go to launch instance
+
+3) Configure instance as follows:
+    Give appropriate name
+    Under application & OS Images select Amazon Linux
+    Select t2.micro instance type
+    Create a new key pair & select RSA key type & .ppk key file format
+    Press Edit on security group, create a security group, give an appropriate name, allow inbound rules ssh on port 22, http on port 80 & custom tcp on 5000
+
+4) Launch Instance
+
+5) Find the .ppk file that is downloaded
+
+6) Launch PuTTY & configure:
+    Session -> host name -> enter ec2-user@<EC2PublicIPAddress>
+    Connection -> SSH -> Auth -> Private key file for authentication -> browse & select .ppk file
+    Connection -> put 15 secs between keepalives -> enable TCP keepalives
+    Click open at bottom of window
+    Press yes to confirm host key
+
+7) In PuTTY do:
+    sudo yum update -y
+    sudo yum install python3 -y
+    sudo yum install python3-pip -y
+    pip3 install Flask Flask-CORS
+    sudo yum install git -y
+
+8) Go back to the flutter code and at every point in the code that calls an IP address, replace it with the public ip address of your EC2 instance
+
+9) Use WinSCP to upload project files:
+    set up new session
+    select SFTP in file protocol dropdown menu
+    In hostname enter EC2 public IP
+    Keep port number as 22
+    enter ec2-user in username
+    Save & Login
+    Upload entire flutter project from device to AWS cloud server by dragging and dropping
+
+10) In PuTTY, navigate to the backend folder
+
+11) Start flask server using command:
+    flask run --host=0.0.0.0 --port=5000
+
+12) Check server status by entering http://your-ec2-public-ip:5000 into a browser
+
+13) Test application connection using an emulator on flutter 
+
+14) If app is fully functional run command:
+    flutter build apk --release
+
+    Resolve any issues if needed
+
+15) Navigate to the apk file in /build folder.
+
+16) Send it to your phone
+
+17) The app is fully completed and functional!
