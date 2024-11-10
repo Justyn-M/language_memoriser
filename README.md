@@ -8,12 +8,14 @@ Created to show my knowledge on basic full stack development.
 Tech stack used:
 
 Flutter - Frontend
+
 Json - Database
+
 Python (Flask) - Backend
+
 Amazon Web Servies
 
 The current available languages are japanese and french.
-
 
 # How to Use
 
