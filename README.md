@@ -205,3 +205,72 @@ This section outlines the steps needed for hosting the backend on Amazon Web Ser
 17) Send it to your phone
 
 18) The app is fully completed and functional!
+
+
+## Adding Additional Security & Automatic Server Run ##
+
+1) Go back to PuTTy & Run Commands:
+    sudo yum update -y
+    sudo yum install nginx -y
+    sudo pip install gunicorn
+   
+2) Navigate to backend folder
+   
+3) Find number of CPU cores on server using command: nproc
+   
+4) Run gunicorn -w X -b 0.0.0.0:5000 app:app
+    Where X = workers=(2×CPU cores)+1
+   
+5) If it is working, stop the server
+   
+6) Run command: which gunicorn -> output should be /usr/local/bin/gunicorn
+   
+7) Create a Systemd Service to run Gunicorn as a service: sudo nano /etc/systemd/system/gunicorn.service
+    
+8) In gunicorn.service fill in with:
+[Unit]
+Description=Gunicorn instance to serve Flask app
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/language_memoriser/backend
+ExecStart=/usr/local/bin/gunicorn -w X -b 0.0.0.0:5000 app:app
+
+[Install]
+WantedBy=multi-user.target
+
+9) Reload and start gunicorn:
+sudo systemctl daemon-reload
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+
+10) Configure Nginx as a Reverse Proxy
+    sudo nano /etc/nginx/conf.d/flask_app.conf
+
+11) Add configurations:
+server {
+    listen 80;
+    server_name instance_public_ip;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+12) Test and run Nginx:
+sudo nginx -t
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+
+13) Check status using:
+    sudo systemctl status gunicorn
+    sudo systemctl status nginx
+
+14) If you have followed all steps, the Server should be running properly and will automatically restart each time AWS instance is restarted, if not debug as needed.
+
