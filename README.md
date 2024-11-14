@@ -208,6 +208,8 @@ This section outlines the steps needed for hosting the backend on Amazon Web Ser
 
 
 ## Adding Additional Security & Automatic Server Run ##
+This section of the tutorial will outline the steps to add addtional security and automatic server running when the instance is turned on through the use
+of using gunicorn to make the flask server run as a production server and nginx as a reverse proxy to manage incoming traffic 
 
 1) Go back to PuTTy & Run Commands:
     sudo yum update -y
