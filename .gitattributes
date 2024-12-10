@@ -1,10 +1,12 @@
+# Force Dart files to be detectable
 *.dart linguist-detectable=true
+
+# Exclude Python and other files from analysis
 *.py linguist-detectable=false
 *.cpp linguist-detectable=false
 *.h linguist-detectable=false
 *.c linguist-detectable=false
 *.hpp linguist-detectable=false
-*.py linguist-vendored
-*.dart linguist-detectable=true
-# Force Dart as the primary language
+
+# Force Dart as the primary language for the repository
 linguist-language=Dart
