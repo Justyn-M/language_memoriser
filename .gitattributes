@@ -1,3 +1,6 @@
 *.dart linguist-detectable=true
 *.py linguist-detectable=false
 *.py linguist-vendored
+*.dart linguist-detectable=true
+# Force Dart as the primary language
+linguist-language=Dart
